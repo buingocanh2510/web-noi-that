@@ -1,76 +1,86 @@
+
+:root{
+    --main-color:#e2762dcc;
+    --btn-color:#092a2c;
+    --icon-hover-color: #e2762dcc;
+    --icon-color: #554708;
+    --heading-main-color:#ffffff;
+    --heading-intro-color: #092a2c;
+
+}
 .about {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    flex-wrap: wrap;
     gap: 2rem;
-  }
-  
-  .about .image {
+}
+
+.about .image {
     -webkit-box-flex: 1;
-        -ms-flex: 1 1 40rem;
-            flex: 1 1 40rem;
-  }
-  
-  .about .image img {
+    -ms-flex: 1 1 40rem;
+    flex: 1 1 40rem;
+}
+
+.about .image img {
     width: 100%;
-  }
-  
-  .about .content {
+}
+
+.about .content {
     -webkit-box-flex: 1;
-        -ms-flex: 1 1 40rem;
-            flex: 1 1 40rem;
-  }
-  
-  .about .content span {
+    -ms-flex: 1 1 40rem;
+    flex: 1 1 40rem;
+}
+
+.about .content span {
     font-size: 2rem;
     color: #779;
-  }
-  
-  .about .content h3 {
+}
+
+.about .content h3 {
     font-size: 2.5rem;
-    color: #244d4d;
+    color: var(--main-color);
     padding-top: 1rem;
-  }
-  
-  .about .content p {
+}
+
+.about .content p {
     font-size: 1.4rem;
     color: #779;
     padding: 1rem 0;
     line-height: 2;
-  }
-  
-  .services .new-product {
+}
+
+.services .new-product {
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: (minmax(30rem, 1fr))[auto-fit];
-        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 1.5rem;
-  }
-  
-  .services .new-product .box {
+}
+
+.services .new-product .box {
     padding: 2rem;
     text-align: center;
-    border: 0.1rem solid #244d4d;
-  }
-  
-  .services .new-product .box img {
+    border: 0.1rem solid var(--main-color);
+}
+
+.services .new-product .box img {
     height: 8rem;
     margin-bottom: 1rem;
-  }
-  
-  .services .new-product .box h3 {
+}
+
+.services .new-product .box h3 {
     font-size: 2.2rem;
-    color: #244d4d;
-  }
-  
-  .services .new-product .box p {
+    color: var(--main-color);
+}
+
+.services .new-product .box p {
     font-size: 1.4rem;
     color: #779;
     line-height: 2;
     padding: 1rem 0;
-  }
+}
