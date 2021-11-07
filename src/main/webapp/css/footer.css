@@ -1,63 +1,73 @@
+
+:root{
+    --main-color:#e2762dcc;
+    --btn-color:#092a2c;
+    --icon-hover-color: #e2762dcc;
+    --icon-color: #554708;
+    --heading-main-color:#ffffff;
+    --heading-intro-color: #092a2c;
+
+}
 .footer {
     background: #f6fbf6;
-  }
-  
-  .footer .new-product {
+}
+
+.footer .new-product {
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: (minmax(25rem, 1fr)) [auto-fit];
-        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     gap: 1.5rem;
-  }
-  
-  .footer .new-product .box h3 {
+}
+
+.footer .new-product .box h3 {
     font-size: 2.2rem;
-    color: #244d4d;
+    color: var(--main-color);
     padding: 1rem 0;
-  }
-  
-  .footer .new-product .box p {
+}
+
+.footer .new-product .box p {
     font-size: 1.6rem;
     color: #779;
     padding-bottom: 1rem;
-  }
-  
-  .footer .new-product .box a {
+}
+
+.footer .new-product .box a {
     font-size: 1.4rem;
     color: #779;
     padding: 1rem 0;
     display: block;
-  }
-  
-  .footer .new-product .box a:hover {
-    color: #244d4d;
-  }
-  
-  .footer .new-product .box a:hover i {
+}
+
+.footer .new-product .box a:hover {
+    color: var(--main-color);
+}
+
+.footer .new-product .box a:hover i {
     padding-right: 2rem;
-  }
-  
-  .footer .new-product .box a i {
+}
+
+.footer .new-product .box a i {
     padding-right: .5rem;
-    color: #244d4d;
-  }
-  
-  .footer .new-product .box form input[type="email"] {
+    color: var(--main-color);
+}
+
+.footer .new-product .box form input[type="email"] {
     width: 100%;
     padding: 1rem 1.2rem;
     font-size: 1.6rem;
-    color: #244d4d;
+    color: var(--main-color);
     text-transform: none;
     margin: .7rem 0;
-    border: 0.1rem solid #244d4d;
-  }
-  
-  .credit {
+    border: 0.1rem solid var(--main-color);
+}
+
+.credit {
     text-align: center;
     font-size: 2rem;
     color: #fff;
-    background: #244d4d;
-  }
+    background:var(--main-color);
+}
 
 
 

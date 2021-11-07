@@ -1,3 +1,13 @@
+
+:root{
+    --main-color:#e2762dcc;
+    --btn-color:#092a2c;
+    --icon-hover-color: #e2762dcc;
+    --icon-color: #554708;
+    --heading-main-color:#ffffff;
+    --heading-intro-color: #092a2c;
+
+}
 .login-form {
     position: fixed;
     top: 0;
@@ -5,81 +15,81 @@
     z-index: 10;
     width: 35rem;
     height: 100vh;
-    background: rgb(141, 180, 140);
+    background: rgb(122, 66, 21);
     padding: 2rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  
-  .login-form.active {
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.login-form.active {
     right: 0;
-    -webkit-box-shadow: 0 0 0 100vw rgba(172, 73, 73, 0.5);
-            box-shadow: 0 0 0 100vw rgba(202, 74, 74, 0.5);
+    -webkit-box-shadow: 0 0 0 100vw rgba(19, 220, 235, 0.5);
+    box-shadow: 0 0 0 100vw #6e2614;
     -webkit-transition: .4s linear;
     transition: .4s linear;
-  }
-  
-  .login-form form {
+}
+
+.login-form form {
     padding: 1.7rem;
-    border: 0.1rem solid #244d4d;
-  }
-  
-  .login-form form h3 {
+    border: 0.1rem solid var(--main-color);
+}
+
+.login-form form h3 {
     font-size: 2.2rem;
     padding-bottom: 1rem;
-    color: #244d4d;
-  }
-  
-  .login-form form .box {
+    color: var(--main-color);
+}
+
+.login-form form .box {
     width: 100%;
     text-transform: none;
     font-size: 1.5rem;
-    color: #244d4d;
+    color: var(--main-color);
     padding: 1rem 1.2rem;
-    border: 0.1rem solid #244d4d;
+    border: 0.1rem solid #6e2614;
     margin: .7rem 0;
-  }
-  
-  .login-form form .remember {
+}
+
+.login-form form .remember {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     gap: .5rem;
-  }
-  
-  .login-form form .remember label {
+}
+
+.login-form form .remember label {
     padding: 1rem 0;
     cursor: pointer;
     font-size: 1.5rem;
-    color: #779;
-  }
-  
-  .login-form form .btn {
+    color: rgb(44, 44, 121);
+}
+
+.login-form form .btn {
     margin: 1rem 0;
     width: 100%;
     text-align: center;
-  }
-  
-  .login-form form p {
+}
+
+.login-form form p {
     padding-top: 1rem;
     font-size: 1.4rem;
-    color: #779;
-  }
-  
-  .login-form form p a {
-    color: #244d4d;
-  }
-  
-  .login-form form p a:hover {
+    color: rgb(44, 44, 121);
+}
+
+.login-form form p a {
+    color: var(--main-color);
+}
+
+.login-form form p a:hover {
     text-decoration: underline;
-  }
+}
