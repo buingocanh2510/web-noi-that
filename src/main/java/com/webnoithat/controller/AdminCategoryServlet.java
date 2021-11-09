@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/admin/products"})
-public class AdminProductServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/admin/categories"})
+public class AdminCategoryServlet extends HttpServlet {
 
     private ProductDAO productDAO;
     private CategoryDAO categoryDAO;
@@ -61,67 +61,70 @@ public class AdminProductServlet extends HttpServlet {
                 getAll(request, response);
                 break;
             case StringUtils.ADD:
-                createProduct(request, response);
+                createCategory(request, response);
                 break;
             case StringUtils.GET_PAGE_UPDATE:
-                getPageUpdateProduct(request, response);
+                getPageUpdateCategory(request, response);
                 break;
             case StringUtils.UPDATE:
-                updateProduct(request, response);
+                updateCategory(request, response);
                 break;
             case StringUtils.DELETE:
-                deleteProduct(request, response);
+                deleteCategory(request, response);
         }
     }
 
     public void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
-        List<Product> products = productDAO.getAll();
-        request.setAttribute("products", products);
-        request.getRequestDispatcher("list-product.jsp").include(request, response);
-    }
-
-    public void createProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        Product product = getProductFromRequest(request);
-        productDAO.createProduct(product);
-        response.sendRedirect("admin.jsp");
-    }
-
-    public void updateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        Product product = getProductFromRequest(request);
-        int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("Update product id = " + id);
-        productDAO.updateProduct(product, id);
-        response.sendRedirect("admin.jsp");
-    }
-
-    public void getPageUpdateProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Product product = productDAO.getById(id);
         List<Category> categories = categoryDAO.getAll();
         request.setAttribute("categories", categories);
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("products/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("list-category.jsp").include(request, response);
     }
 
-    public void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("Xoa id: " + id);
-        productDAO.deleteProductById(id);
+    public void createCategory(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        Category category = getCategoryFromRequest(request);
+        categoryDAO.creatCategory(category);
         response.sendRedirect("admin.jsp");
     }
 
-    private Product getProductFromRequest(HttpServletRequest request) throws UnsupportedEncodingException {
+    public void getPageUpdateCategory(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Category category = categoryDAO.getById(id);
+        request.setAttribute("category", category);
+        request.getRequestDispatcher("categories/edit.jsp").forward(request, response);
+    }
+
+    public void updateCategory(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        Category category = getCategoryFromRequest(request);
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("Update category id = " + id);
+        categoryDAO.updateCategory(category, id);
+        response.sendRedirect("admin.jsp");
+    }
+
+    public void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("Xoa category id: " + id);
+
+        // Kiem tra co san pham ko
+        List<Product> products = productDAO.getByCategoryId(id);
+        if (products != null && products.size() > 0) {
+            System.out.println("Không thể xoá do danh mục sản phẩm này đã có sản phẩm");
+            request.setAttribute("err", "Không thể xoá do danh mục sản phẩm này đã có sản phẩm");
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            return;
+        }
+
+        categoryDAO.deleteCategoryById(id);
+        response.sendRedirect("admin.jsp");
+    }
+
+    private Category getCategoryFromRequest(HttpServletRequest request) throws UnsupportedEncodingException {
         String name = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
         String description = new String(request.getParameter("description").getBytes("iso-8859-1"), "utf-8");
-        double price = Double.parseDouble(request.getParameter("price"));
-        int numberOfProduct = Integer.parseInt(request.getParameter("numberOfProduct"));
-        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         String urlImage = request.getParameter("urlImage");
-        List<String> imageDetails = Arrays.asList(request.getParameter("imageDetails").split(","));
 
-        return new Product(categoryId, name, price, description,
-                numberOfProduct, urlImage, imageDetails);
+        return new Category(name, description, urlImage);
     }
 }

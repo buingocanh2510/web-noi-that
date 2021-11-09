@@ -37,10 +37,10 @@
     <h1 class="title"><span>Danh mục sản phẩm</span></h1>
 
     <div class="new-product">
-        <c:forEach items="${categories}" var="category">
-            <a href="products?categoryId=${category.getId()}" class="box">
-                <img src="image/icon-1.png" alt="">
-                <h3>${category.getName()}</h3>
+        <c:forEach items="${categories}" var="categoryItem">
+            <a href="products?categoryId=${categoryItem.getId()}" class="box">
+                <img src="${categoryItem.getUrlImage()}" alt="">
+                <h3>${categoryItem.getName()}</h3>
             </a>
         </c:forEach>
     </div>
@@ -48,7 +48,7 @@
 </section>
 
 <section class="products">
-    <h1 class="title"><span>Sản phẩm mới</span></h1>
+    <h1 class="title"><span>${category.getName()}</span></h1>
     <div class="new-product">
         <c:forEach items="${products}" var="product">
         <div class="box">

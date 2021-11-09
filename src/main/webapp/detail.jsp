@@ -35,11 +35,6 @@
 
 <jsp:include page="/header.jsp"/>
 
-<section class="heading">
-    <h3>Cửa hàng</h3>
-    <p><a href="index.jsp">trang chủ</a> / <span>chi tiết</span></p>
-</section>
-
 <div class="pd-wrap">
     <div class="container">
         <div class="heading-section">
