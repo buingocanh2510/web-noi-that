@@ -1,6 +1,8 @@
 package com.webnoithat.controller;
 
-import com.webnoithat.model.Categories;
+import com.webnoithat.dao.CategoryDAO;
+import com.webnoithat.dao.ProductDAO;
+import com.webnoithat.model.Category;
 import com.webnoithat.model.Product;
 
 import javax.servlet.ServletException;
@@ -9,75 +11,108 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @WebServlet(urlPatterns = {"/products"})
 public class ProductServlet extends HttpServlet {
+
+    private ProductDAO productDAO;
+    private CategoryDAO categoryDAO;
+
+    @Override
+    public void init() {
+        String jdbcURL = getServletContext().getInitParameter("jdbcURL");
+        String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
+        String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
+
+        productDAO = new ProductDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        categoryDAO = new CategoryDAO(jdbcURL, jdbcUsername, jdbcPassword);
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         String id = request.getParameter("id");
+        String name = request.getParameter("name");
 
-        if (Objects.isNull(id)) {
+        // TH lấy tất cả sản phẩm
+        if (Objects.isNull(id) && Objects.isNull(name)) {
             System.out.println("Get all");
-            getAll(request, response);
+            getByCategoryId(request, response);
             return;
         }
 
+        // TH Search
+        if (Objects.nonNull(name)) {
+            System.out.println("searh name = " + name);
+            searchProducts(request, response);
+            return;
+        }
+
+        // TH lấy theo id sản phẩm
         getById(request, response);
     }
 
-    public void getAll(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void getByCategoryId(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException, SQLException {
+
         List<Product> products = new ArrayList<>();
-        List<Categories> categories = new ArrayList<>();
-        categories.add(new Categories("1", "Ghế Sofa", ""));
-        categories.add(new Categories("2", "Tủ đồ và Kệ", ""));
-        categories.add(new Categories("3", "Bàn làm việc", ""));
-        categories.add(new Categories("4", "Ghế mini", ""));
-        categories.add(new Categories("5", "Tủ quần áo", ""));
+        List<Category> categories = categoryDAO.getAll();
+
+        Category category = new Category();
+        category.setName("Tất cả sản phẩm");
         String categoryId = request.getParameter("categoryId");
-        if (Objects.nonNull(categoryId) && categoryId.equals("2")) {
-            products.add(new Product("San pham 1", 100000, "https://i.stack.imgur.com/N4TSy.jpg"));
-            products.add(new Product("San pham 2", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 3", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 4", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 5", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 6", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 7", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 8", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 9", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 10", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 11", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 12", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 13", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 14", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 15", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 16", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 17", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
-            products.add(new Product("San pham 18", 100000, "https://noithatvanphong.com/wp-content/uploads/2021/07/Tu-locker-de-do-TMG983-3K.jpg"));
+
+        if (Objects.isNull(categoryId)) {
+            products.addAll(productDAO.getAll());
+        } else {
+            products.addAll(productDAO.getByCategoryId(Integer.parseInt(categoryId)));
+            category = categoryDAO.getById(Integer.parseInt(categoryId));
         }
 
-        if (Objects.nonNull(categoryId) && categoryId.equals("1")) {
-            products.add(new Product("San pham 1", 100000, "https://i.stack.imgur.com/N4TSy.jpg"));
-        }
-
+        request.setAttribute("category", category);
         request.setAttribute("products", products);
         request.setAttribute("categories", categories);
         request.getRequestDispatcher("/shop.jsp").forward(request, response);
     }
 
-    public void getById(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void getById(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException, SQLException {
 
-        System.out.println(request.getParameter("id"));
-        Product product = new Product("San pham 1", 100000, "https://i.stack.imgur.com/N4TSy.jpg");
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product = productDAO.getById(id);
+
         request.setAttribute("product", product);
         request.getRequestDispatcher("/detail.jsp").forward(request, response);
+    }
+
+    public void searchProducts(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException, SQLException {
+
+        List<Product> products = new ArrayList<>();
+        List<Category> categories = categoryDAO.getAll();
+
+        Category category = new Category();
+        category.setName("Tất cả sản phẩm");
+
+        List<Product> result = productDAO.searchProducts(request.getParameter("name"));
+        products.addAll(result);
+
+        request.setAttribute("category", category);
+        request.setAttribute("products", products);
+        request.setAttribute("categories", categories);
+        request.getRequestDispatcher("/shop.jsp").forward(request, response);
     }
 }

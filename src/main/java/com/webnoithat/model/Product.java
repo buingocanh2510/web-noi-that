@@ -1,11 +1,10 @@
 package com.webnoithat.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
-    private static int id = 0;
-    private String categoryId;
+    private int id;
+    private int categoryId;
     private String name;
     private double price;
     private String description;
@@ -18,10 +17,34 @@ public class Product {
     }
 
     public Product(String name, double price, String urlImage) {
-        id++;
+        this.id = id;
         this.name = name;
         this.price = price;
         this.urlImage = urlImage;
+    }
+
+    public Product(int categoryId, String name, double price, String description,
+                   int numberOfProduct, String urlImage, List<String> imageDetails) {
+        this.categoryId = categoryId;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.numberOfProduct = numberOfProduct;
+        this.urlImage = urlImage;
+        this.imageDetails = imageDetails;
+    }
+
+
+    public Product(int id, int categoryId, String name, double price, String description,
+                   int numberOfProduct, String urlImage, List<String> imageDetails) {
+        this.id = id;
+        this.categoryId = categoryId;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.numberOfProduct = numberOfProduct;
+        this.urlImage = urlImage;
+        this.imageDetails = imageDetails;
     }
 
     public int getId() {
@@ -32,11 +55,11 @@ public class Product {
         this.id = id;
     }
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -57,8 +80,7 @@ public class Product {
     }
 
     public String getDescription() {
-        return "chi tiết của sản phẩm " + this.getId();
-//        return description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -82,15 +104,7 @@ public class Product {
     }
 
     public List<String> getImageDetails() {
-        List<String> imgs = new ArrayList<>();
-        imgs.add("https://caotoanphat.com/wp-content/uploads/2021/09/ban-lam-viec-ket-hop-chan-ke-2-150x150.jpg");
-        imgs.add("https://caotoanphat.com/wp-content/uploads/2021/09/ban-lam-viec-ket-hop-chan-ke-1-510x510.jpg");
-        imgs.add("https://caotoanphat.com/wp-content/uploads/2021/09/ban-lam-viec-ket-hop-chan-ke-510x510.jpg");
-        imgs.add("https://caotoanphat.com/wp-content/uploads/2021/09/kich-thuoc-ban-lam-viec-510x510.jpg");
-        imgs.add("https://caotoanphat.com/wp-content/uploads/2021/09/ban-lam-viec-ket-hop-chan-ke-510x510.jpg");
-        imgs.add("https://caotoanphat.com/wp-content/uploads/2021/09/kich-thuoc-ban-lam-viec-510x510.jpg");
-        return imgs;
-//        return imageDetails;
+        return imageDetails;
     }
 
     public void setImageDetails(List<String> imageDetails) {

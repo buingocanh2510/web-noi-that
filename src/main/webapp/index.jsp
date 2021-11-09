@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./css/shop-cart.css">
     <link rel="stylesheet" href="./css/team.css">
     <link rel="stylesheet" href="./css/contact.css">
-    <link rel="stylesheet" href="./css/edit-add.css">
+    <link rel="stylesheet" href="css/edit-add.css">
 </head>
 <body>
 <jsp:include page="/header.jsp"/>

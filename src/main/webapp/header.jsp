@@ -1,13 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/about.css">
+<link rel="stylesheet" href="css/blog.css">
+<link rel="stylesheet" href="css/shop-cart.css">
+<link rel="stylesheet" href="css/team.css">
+<link rel="stylesheet" href="css/contact.css">
+
 <!-- header section starts -->
 <header class="header">
 
     <a href="index.jsp" class="logo"> <i class="fab fa-phoenix-framework"></i> Nội thất Đại Nam </a>
 
-    <form action="" class="search-form">
-        <input type="search" placeholder="Tìm kiếm..." id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
+    <form action="${pageContext.request.contextPath}/products" class="search-form">
+        <input type="search" name="name" placeholder="Tìm kiếm..." id="search-box">
+        <button type="submit"><label for="search-box" class="fas fa-search"></label></button>
     </form>
 
     <div class="icons">
@@ -25,12 +35,12 @@
 
 <!-- navbar -->
 <nav class="navbar">
-    <a href="home.html">home</a>
-    <a href="shop.jsp">shop</a>
-    <a href="about.jsp">about</a>
-    <a href="team.jsp">team</a>
-    <a href="blog.jsp">blog</a>
-    <a href="contact.jsp">contact</a>
+    <a href="${pageContext.request.contextPath}/index.jsp">home</a>
+    <a href="${pageContext.request.contextPath}/products">shop</a>
+    <a href="${pageContext.request.contextPath}/about.jsp">about</a>
+    <a href="${pageContext.request.contextPath}/team.jsp">team</a>
+    <a href="${pageContext.request.contextPath}/blog.jsp">blog</a>
+    <a href="${pageContext.request.contextPath}/contact.jsp">contact</a>
 </nav>
 
 <!-- shopping cart -->
