@@ -1,5 +1,6 @@
 package com.webnoithat.model;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Product {
@@ -7,10 +8,12 @@ public class Product {
     private int categoryId;
     private String name;
     private double price;
+    private String priceStr;
     private String description;
     private int numberOfProduct;
     private String urlImage;
     private List<String> imageDetails;
+    private String imageDetailsStr;
 
     public Product() {
 
@@ -109,5 +112,22 @@ public class Product {
 
     public void setImageDetails(List<String> imageDetails) {
         this.imageDetails = imageDetails;
+    }
+
+    public String getPriceStr() {
+        DecimalFormat df = new DecimalFormat("#,###");
+        return df.format(price);
+    }
+
+    public void setPriceStr(String priceStr) {
+        this.priceStr = priceStr;
+    }
+
+    public String getImageDetailsStr() {
+        return imageDetails.toString().replace("[", "").replace("]", "");
+    }
+
+    public void setImageDetailsStr(String imageDetailsStr) {
+        this.imageDetailsStr = imageDetailsStr;
     }
 }

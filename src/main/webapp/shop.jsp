@@ -52,26 +52,36 @@
     <div class="new-product">
         <c:forEach items="${products}" var="product">
         <div class="box">
-            <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="?id=${product.getId()}" class="fas fa-eye"></a>
-            </div>
-            <div class="image">
-                <img src="${product.getUrlImage()}" alt="">
-            </div>
-            <div class="content">
-                <div class="price">${product.getPrice()}VNĐ</div>
-                <h3>${product.getName()}</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span> (50) </span>
+            <form action="${pageContext.request.contextPath}/shopCarts?action=add" method="post">
+                <div class="icons">
+                    <input type="text" value="${product.getId()}" name="productId" hidden>
+                    <input type="text" value="1" name="numberOfProduct" hidden>
+                    <input type="text" hidden
+                           value="${requestScope['javax.servlet.forward.request_uri']}?${requestScope['javax.servlet.forward.query_string']}"
+                           name="url"
+                    />
+                    <button type="submit">
+                        <a class="fas fa-shopping-cart"></a>
+                    </button>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="?id=${product.getId()}" class="fas fa-eye"></a>
                 </div>
-            </div>
+                <div class="image">
+                    <img src="${product.getUrlImage()}" alt="">
+                </div>
+                <div class="content">
+                    <div class="price">${product.getPriceStr()}VNĐ</div>
+                    <h3>${product.getName()}</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span> (50) </span>
+                    </div>
+                </div>
+            </form>
         </div>
         </c:forEach>
 </section>

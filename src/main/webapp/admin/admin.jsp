@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title> admin </title>
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/edit-add.css"/>
 
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

@@ -44,55 +44,7 @@
 </nav>
 
 <!-- shopping cart -->
-<div class="shopping-cart">
-    <div class="box">
-        <i class="fas fa-times"></i>
-        <img src="image/cart-img-1.jpg" alt="">
-        <div class="content">
-            <h3>Ghế lò xo</h3>
-            <span class="quantity"> 1 </span>
-            <span class="multiply"> x </span>
-            <span class="price"> 270.000 VNĐ </span>
-        </div>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-times"></i>
-        <img src="image/cart-img-2.jpg" alt="">
-        <div class="content">
-            <h3>Ghế bàn ăn</h3>
-            <span class="quantity"> 1 </span>
-            <span class="multiply"> x </span>
-            <span class="price"> 450.000 VNĐ </span>
-        </div>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-times"></i>
-        <img src="image/cart-img-3.jpg" alt="">
-        <div class="content">
-            <h3>Ghế cosplay Japan</h3>
-            <span class="quantity"> 1 </span>
-            <span class="multiply"> x </span>
-            <span class="price"> 920.000 VNĐ </span>
-        </div>
-    </div>
-
-    <div class="box">
-        <i class="fas fa-times"></i>
-        <img src="image/cart-img-4.jpg" alt="">
-        <div class="content">
-            <h3>Ghế văn phòng</h3>
-            <span class="quantity"> 1 </span>
-            <span class="multiply"> x </span>
-            <span class="price"> 370.000 VNĐ </span>
-        </div>
-    </div>
-
-    <h3 class="total"> tổng : <span> 2.000.000 VNĐ  </span></h3>
-
-    <a href="#" class="btn">Thanh toán giỏ hàng</a>
-</div>
+<jsp:include page="/shopCarts"/>
 
 <!-- login form -->
 <div class="login-form">
