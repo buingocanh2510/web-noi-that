@@ -30,7 +30,7 @@
                     <tr>
                         <th scope="row">${product.getId()}</th>
                         <td>${product.getName()}</td>
-                        <td>${product.getPrice()} VNĐ</td>
+                        <td>${product.getPriceStr()} VNĐ</td>
                         <td>${product.getNumberOfProduct()}</td>
                         <td>${product.getDescription()}</td>
                         <td>

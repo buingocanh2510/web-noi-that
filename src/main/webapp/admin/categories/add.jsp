@@ -18,16 +18,16 @@
     <h3>Thêm danh mục sản phẩm</h3>
 
     <form action="${pageContext.request.contextPath}/admin/categories?action=add" method="post" class="form-edit">
-        <label class="name-product" for="">Tên:</label>
+        <label class="name-product" for="">Tên sản phẩm:</label>
         <input class="input-name" name="name" type="text"> <br>
         <label class="detail" for="">Mô tả:</label>
         <textarea class="input-detail" name="description" id="" cols="30" rows="10"></textarea> <br>
-        <label class="id-product" for="">Link ảnh:</label>
-        <input class="input-id" name="urlImage" type="text"> <br>
+        <label class="detail-link-image" for="">Link ảnh chi tiết:</label>
+        <input class="input-detail-link-image" name="urlImage" type="text"> <br>
 
         <div class="btn">
-            <input type="submit" class="btn-edit-form" value="Lưu">
-            <input type="reset" class="btn-edit-form" value="Huỷ bỏ">
+            <input type="submit" class="btn-save" value="Lưu">
+            <input type="button" class="btn-cancel" value="Huỷ bỏ">
         </div>
     </form>
 </div>

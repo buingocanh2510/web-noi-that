@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/admin/categories"})

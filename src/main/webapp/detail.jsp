@@ -76,95 +76,100 @@
                             </div>
                             <span>3 Reviews</span>
                         </div>
-                        <div class="product-price-discount"><span>${product.getPrice()} VNĐ</span><span
-                                class="line-through">${product.getPrice()} VNĐ</span></div>
+                        <div class="product-price-discount"><span>${product.getPriceStr()} VNĐ</span><span
+                                class="line-through">${product.getPriceStr()} VNĐ</span></div>
                     </div>
+
                     <p>Mã sản phẩm: ${product.getId()}</p>
                     <div class="product-count">
-                        <label>Số lượng</label>
-                        <form action="#" class="display-flex">
+                        <form action="${pageContext.request.contextPath}/shopCarts?action=add" method="post" class="display-flex">
+                            <input type="text" value="${product.getId()}" name="productId" hidden>
+                            <input type="text" hidden
+                                   value="${requestScope['javax.servlet.forward.request_uri']}?${requestScope['javax.servlet.forward.query_string']}"
+                                   name="url"
+                            />
+                            <label>Số lượng</label>
                             <div class="qtyminus">-</div>
-                            <input type="text" name="quantity" value="1" class="qty">
+                            <input type="text" name="numberOfProduct" value="1" class="qty">
                             <div class="qtyplus">+</div>
+                            <button type="submit">Thêm vào giỏ hàng</button>
                         </form>
-                        <a href="#" class="round-black-btn">Thêm vào giỏ hàng</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="product-info-tabs">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-                       aria-controls="description" aria-selected="true">Chi tiết</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
-                       aria-controls="review" aria-selected="false">Đánh giá</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="description" role="tabpanel"
-                     aria-labelledby="description-tab">
-                    ${product.getDescription()}.
-                </div>
-                <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                    <div class="review-heading">REVIEWS</div>
-                    <p class="mb-20">Hiện tại chưa có đánh giá nào.</p>
-                    <form class="review-form">
-                        <div class="form-group">
-                            <label>Đánh giá của bạn</label>
-                            <div class="reviews-counter">
-                                <div class="rate">
-                                    <input type="radio" id="star5" name="rate" value="5"/>
-                                    <label for="star5" title="text">5 stars</label>
-                                    <input type="radio" id="star4" name="rate" value="4"/>
-                                    <label for="star4" title="text">4 stars</label>
-                                    <input type="radio" id="star3" name="rate" value="3"/>
-                                    <label for="star3" title="text">3 stars</label>
-                                    <input type="radio" id="star2" name="rate" value="2"/>
-                                    <label for="star2" title="text">2 stars</label>
-                                    <input type="radio" id="star1" name="rate" value="1"/>
-                                    <label for="star1" title="text">1 star</label>
+            <div class="product-info-tabs">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                           aria-controls="description" aria-selected="true">Chi tiết</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                           aria-controls="review" aria-selected="false">Đánh giá</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel"
+                         aria-labelledby="description-tab">
+                        ${product.getDescription()}.
+                    </div>
+                    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                        <div class="review-heading">REVIEWS</div>
+                        <p class="mb-20">Hiện tại chưa có đánh giá nào.</p>
+                        <form class="review-form">
+                            <div class="form-group">
+                                <label>Đánh giá của bạn</label>
+                                <div class="reviews-counter">
+                                    <div class="rate">
+                                        <input type="radio" id="star5" name="rate" value="5"/>
+                                        <label for="star5" title="text">5 stars</label>
+                                        <input type="radio" id="star4" name="rate" value="4"/>
+                                        <label for="star4" title="text">4 stars</label>
+                                        <input type="radio" id="star3" name="rate" value="3"/>
+                                        <label for="star3" title="text">3 stars</label>
+                                        <input type="radio" id="star2" name="rate" value="2"/>
+                                        <label for="star2" title="text">2 stars</label>
+                                        <input type="radio" id="star1" name="rate" value="1"/>
+                                        <label for="star1" title="text">1 star</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Tin nhắn của bạn</label>
-                            <textarea class="form-control" rows="10"></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" name="" class="form-control" placeholder="Name*">
+                            <div class="form-group">
+                                <label>Tin nhắn của bạn</label>
+                                <textarea class="form-control" rows="10"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="" class="form-control" placeholder="Name*">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="" class="form-control" placeholder="Email Id*">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" name="" class="form-control" placeholder="Email Id*">
-                                </div>
-                            </div>
-                        </div>
-                        <button class="round-black-btn">Gửi đánh giá của bạn</button>
-                    </form>
+                            <button class="round-black-btn">Gửi đánh giá của bạn</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- footer section  -->
-<jsp:include page="/footer.jsp"/>
+    <!-- footer section  -->
+    <jsp:include page="/footer.jsp"/>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity=" sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-<script src="js/detail.js"></script>
-<script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity=" sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="js/detail.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>
