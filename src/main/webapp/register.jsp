@@ -50,7 +50,7 @@
     </div>
     <!--// copyright-->
     <div class="colorlibcopy-agile">
-        <p>© 2018 Nội thất Đại Nam</p>
+        <p>© 2018 Nội thất Fu2Tee</p>
     </div>
     <!-- //copyright -->
     <ul class="colorlib-bubbles">

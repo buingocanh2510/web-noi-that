@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <title> admin </title>
     <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/edit-add.css"/>
 
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -19,7 +18,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <i class="fab fa-phoenix-framework"></i>
-        <span class="logo_name">Nội thất Đại Nam</span>
+        <span class="logo_name">Nội thất Fu2Tee</span>
     </div>
     <ul class="nav-links">
         <li>
@@ -66,7 +65,7 @@
         </div>
         <div class="profile-details">
             <img src="/build/web/image/haha.jpg" alt="">
-            <span class="admin_name">Nội thất Đại Nam</span>
+            <span class="admin_name">Nội thất Fu2Tee</span>
         </div>
     </nav>
 

@@ -27,7 +27,7 @@
                     <h3>${shopCart.getProductName()}</h3>
                     <span class="quantity"> ${shopCart.getNumberOfProduct()} </span>
                     <span class="multiply"> x </span>
-                    <span class="price"> ${shopCart.getPrice()} VNĐ </span>
+                    <span class="price"> ${shopCart.getPriceStr()} VNĐ </span>
                 </div>
             </div>
         </form>

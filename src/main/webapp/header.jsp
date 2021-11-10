@@ -13,7 +13,7 @@
 <!-- header section starts -->
 <header class="header">
 
-    <a href="index.jsp" class="logo"> <i class="fab fa-phoenix-framework"></i> Nội thất Đại Nam </a>
+    <a href="index.jsp" class="logo"> <i class="fab fa-phoenix-framework"></i> Nội thất Fu2Tee </a>
 
     <form action="${pageContext.request.contextPath}/products" class="search-form">
         <input type="search" name="name" placeholder="Tìm kiếm..." id="search-box">

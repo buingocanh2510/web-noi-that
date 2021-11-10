@@ -14,11 +14,11 @@
 
 <body>
 <div class="section-edit">
-    <a href="../../index.jsp" class="logo"> <i class="fab fa-phoenix-framework"></i> Nội thất ABC|</a>
+    <a href="../../index.jsp" class="logo"> <i class="fab fa-phoenix-framework"></i> Nội thất Fu2Tee</a>
     <h3>Thêm danh mục sản phẩm</h3>
 
     <form action="${pageContext.request.contextPath}/admin/categories?action=add" method="post" class="form-edit">
-        <label class="name-product" for="">Tên sản phẩm:</label>
+        <label class="name-product" for="">Tên danh mục:</label>
         <input class="input-name" name="name" type="text"> <br>
         <label class="detail" for="">Mô tả:</label>
         <textarea class="input-detail" name="description" id="" cols="30" rows="10"></textarea> <br>

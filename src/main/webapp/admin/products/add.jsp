@@ -15,7 +15,7 @@
 
 <body>
 <div class="section-edit">
-    <a href="../../index.jsp" class="logo"> <i class="fab fa-phoenix-framework"></i> Nội thất ABC|</a>
+    <a href="../../index.jsp" class="logo"> <i class="fab fa-phoenix-framework"></i> Nội thất Fu2Tee</a>
     <h3>Trang thêm sản phẩm dành cho quản trị!</h3>
 
     <form action="${pageContext.request.contextPath}/admin/products?action=add" method="post" class="form-edit">
