@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nội thất Đại Nam</title>
+    <title>Nội thất Fu2Tee</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -29,7 +29,7 @@
     <div class="slides-container">
         <div class="slide active">
             <div class="content">
-                <span>Nội thất ABC</span>
+                <span>Nội thất Fu2Tee</span>
                 <h3>bảo hành chất lượng</h3>
                 <p>Chúng tôi cam kết 100% về chất lượng sản phẩm và gói bảo hành.</p>
                 <a href="products" class="btn">Mua ngay</a>
@@ -41,7 +41,7 @@
 
         <div class="slide">
             <div class="content">
-                <span>Nội thất Đại Nam</span>
+                <span>Nội thất Fu2Tee</span>
                 <h3>Quy trình sản xuất hàng đầu</h3>
                 <p>Các sảnn phẩm của chúng tôi được gia công dưới bàn tay của những công nhân trình độ chuyên môn cao
                     kết hợp với hệ thống máy móc hiện đại.</p>

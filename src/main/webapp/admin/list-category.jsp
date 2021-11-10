@@ -15,7 +15,7 @@
             <table class="table m-0">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Mã</th>
                     <th scope="col">Tên danh mục</th>
                     <th scope="col">Mô tả</th>
                     <th></th>
@@ -24,7 +24,7 @@
                 <tbody>
                 <c:forEach items="${categories}" var="category">
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">${category.getId()}</th>
                         <td>${category.getName()}</td>
                         <td>${category.getDescription()}</td>
                         <td>

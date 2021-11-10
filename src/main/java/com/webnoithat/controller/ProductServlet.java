@@ -69,16 +69,19 @@ public class ProductServlet extends HttpServlet {
             throws IOException, ServletException, SQLException {
 
         List<Product> products = new ArrayList<>();
+
+        // Lay tat ca danh mục sản phẩm
         List<Category> categories = categoryDAO.getAll();
 
         Category category = new Category();
         category.setName("Tất cả sản phẩm");
         String categoryId = request.getParameter("categoryId");
 
+        // Lấy theo từng danh mục sản phẩm (theo categoryId)
         if (Objects.isNull(categoryId)) {
-            products.addAll(productDAO.getAll());
+            products.addAll(productDAO.getAll()); // lấy tất cả
         } else {
-            products.addAll(productDAO.getByCategoryId(Integer.parseInt(categoryId)));
+            products.addAll(productDAO.getByCategoryId(Integer.parseInt(categoryId))); // lấy theo danh mục sản phẩm (id)
             category = categoryDAO.getById(Integer.parseInt(categoryId));
         }
 

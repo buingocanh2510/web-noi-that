@@ -1,5 +1,7 @@
 package com.webnoithat.model;
 
+import java.text.DecimalFormat;
+
 public class ShopCartDetail extends ShopCart {
     private String productName;
     private double totalPrice;
@@ -44,5 +46,10 @@ public class ShopCartDetail extends ShopCart {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPriceStr() {
+        DecimalFormat df = new DecimalFormat("#,###");
+        return df.format(price);
     }
 }

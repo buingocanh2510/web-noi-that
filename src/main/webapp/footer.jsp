@@ -45,5 +45,5 @@
 </section>
 
 <section class="credit">
-    Created by Nhóm 03 | Nội thất Đại Nam
+    Created by Nhóm 03 | Nội thất Fu2Tee
 </section>
