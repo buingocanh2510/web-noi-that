@@ -10,7 +10,8 @@ public class DatabaseDAO {
     protected final String jdbcPassword;
     protected Connection jdbcConnection;
 
-    public DatabaseDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+    public DatabaseDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) throws ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         this.jdbcURL = jdbcURL;
         this.jdbcUsername = jdbcUsername;
         this.jdbcPassword = jdbcPassword;

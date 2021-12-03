@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CategoryDAO extends DatabaseDAO {
 
-    public CategoryDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+    public CategoryDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) throws ClassNotFoundException {
         super(jdbcURL, jdbcUsername, jdbcPassword);
     }
 

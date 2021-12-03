@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShopCartDAO extends DatabaseDAO {
-    public ShopCartDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+    public ShopCartDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) throws ClassNotFoundException {
         super(jdbcURL, jdbcUsername, jdbcPassword);
     }
 
