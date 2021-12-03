@@ -17,7 +17,7 @@
             <div class="box">
                 <button type="submit" class="fas fa-times">
                 </button>
-                <input type="text" name="id" value="${shopCart.getId()}" hidden/>
+                <input type="text" name="productId" value="${shopCart.getProductId()}" hidden/>
                 <input type="text" hidden
                        value="${requestScope['javax.servlet.forward.request_uri']}?${requestScope['javax.servlet.forward.query_string']}"
                        name="url"

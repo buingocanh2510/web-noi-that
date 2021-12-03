@@ -28,8 +28,16 @@ public class AdminCategoryServlet extends HttpServlet {
         String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
         String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
 
-        productDAO = new ProductDAO(jdbcURL, jdbcUsername, jdbcPassword);
-        categoryDAO = new CategoryDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        try {
+            productDAO = new ProductDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            categoryDAO = new CategoryDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

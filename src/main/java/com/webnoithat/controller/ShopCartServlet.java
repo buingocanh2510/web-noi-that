@@ -1,6 +1,8 @@
 package com.webnoithat.controller;
 
+import com.webnoithat.dao.ProductDAO;
 import com.webnoithat.dao.ShopCartDAO;
+import com.webnoithat.model.Product;
 import com.webnoithat.model.ShopCart;
 import com.webnoithat.model.ShopCartDetail;
 import com.webnoithat.utils.StringUtils;
@@ -10,15 +12,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @WebServlet(urlPatterns = {"/shopCarts"})
 public class ShopCartServlet extends HttpServlet {
     private ShopCartDAO shopCartDAO;
+    private ProductDAO productDAO;
 
     @Override
     public void init() {
@@ -26,7 +30,12 @@ public class ShopCartServlet extends HttpServlet {
         String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
         String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
 
-        shopCartDAO = new ShopCartDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        try {
+            shopCartDAO = new ShopCartDAO(jdbcURL, jdbcUsername, jdbcPassword);
+            productDAO = new ProductDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,43 +75,103 @@ public class ShopCartServlet extends HttpServlet {
         ShopCart shopCart = getShopCartFromRequest(request);
 
         // Kiểm tra xem sản phẩm đã có trong giỏ hàng hay chưa
-        ShopCart shopCartDB = shopCartDAO.getByProductId(productId);
+//        ShopCart shopCartDB = shopCartDAO.getByProductId(productId);
+        HttpSession session = request.getSession();
 
         // TH đã có => update số lượng sản phẩm
-        if (Objects.nonNull(shopCartDB)) {
-            // Update
-            int newNumberOfProduct = shopCart.getNumberOfProduct() + shopCartDB.getNumberOfProduct();
-            shopCartDAO.updateShopCartByProductId(shopCartDB, newNumberOfProduct);
+//        if (Objects.nonNull(shopCartDB)) {
+//            // Update
+//            int newNumberOfProduct = shopCart.getNumberOfProduct() + shopCartDB.getNumberOfProduct();
+//            shopCartDAO.updateShopCartByProductId(shopCartDB, newNumberOfProduct);
+//
+//            // load lai trang hien tai
+//            response.sendRedirect(request.getParameter("url"));
+//
+//            return;
+//        }
 
-            // load lai trang hien tai
-            response.sendRedirect(request.getParameter("url"));
-
-            return;
+        List<ShopCartDetail> shopCarts = (List<ShopCartDetail>) session.getAttribute("shopCarts");
+        if (shopCarts != null && shopCarts.size() > 0) {
+            boolean isUpdate = false;
+            for (ShopCartDetail item : shopCarts) {
+                if (item.getProductId() == productId) {
+                    // Update
+                    int newNumberOfProduct = shopCart.getNumberOfProduct() + item.getNumberOfProduct();
+                    item.setNumberOfProduct(newNumberOfProduct);
+                    item.setTotalPrice(newNumberOfProduct * item.getPrice());
+                    isUpdate = true;
+                    break;
+                }
+            }
+            if (isUpdate) {
+                double totalPriceNumber = shopCarts.stream().mapToDouble(ShopCartDetail::getTotalPrice).sum();
+                DecimalFormat df = new DecimalFormat("#,###");
+                String totalPrice = df.format(totalPriceNumber);
+                request.setAttribute("shopCarts", shopCarts);
+                request.setAttribute("totalPrice", totalPrice);
+                // load lai trang hien tai
+                response.sendRedirect(request.getParameter("url"));
+                return;
+            }
         }
 
         // TH chưa có => Thêm mới
-        shopCartDAO.createShopCart(shopCart);
+//        shopCartDAO.createShopCart(shopCart);
+        Product product = productDAO.getById(shopCart.getProductId());
+        ShopCartDetail shopCartDetail = new ShopCartDetail(
+                shopCart.getId(),
+                shopCart.getProductId(),
+                product.getName(),
+                shopCart.getNumberOfProduct(),
+                shopCart.getNumberOfProduct() * product.getPrice(),
+                product.getUrlImage(),
+                product.getPrice()
+        );
+
+        if (shopCarts == null) {
+            shopCarts = new ArrayList<>();
+        }
+        shopCarts.add(shopCartDetail);
+        session.setAttribute("shopCarts", shopCarts);
+
         //load lai trang hien tai
         response.sendRedirect(request.getParameter("url"));
     }
 
     public void getAll(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, SQLException {
-        List<ShopCartDetail> shopCarts = shopCartDAO.getAll();
 
-        double totalPriceNumber = shopCarts.stream().mapToDouble(ShopCartDetail::getTotalPrice).sum();
+//        List<ShopCartDetail> shopCarts = shopCartDAO.getAll();
+        HttpSession session = request.getSession();
+        List<ShopCartDetail> shopCarts = (List<ShopCartDetail>) session.getAttribute("shopCarts");
+
+        double totalPriceNumber;
+        if (shopCarts == null) {
+            totalPriceNumber = 0;
+        } else {
+            totalPriceNumber = shopCarts.stream().mapToDouble(ShopCartDetail::getTotalPrice).sum();
+        }
 
         DecimalFormat df = new DecimalFormat("#,###");
         String totalPrice = df.format(totalPriceNumber);
         request.setAttribute("shopCarts", shopCarts);
         request.setAttribute("totalPrice", totalPrice);
+
         request.getRequestDispatcher("/shop-cart.jsp").include(request, response);
     }
 
     public void deleteShopCart(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("Xoa gio hang id: " + id);
-        shopCartDAO.deleteShopCartById(id);
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        System.out.println("Xoa gio hang productId: " + productId);
+        List<ShopCartDetail> shopCartDetails = (List<ShopCartDetail>) request.getSession().getAttribute("shopCarts");
+        for (ShopCartDetail shopCartDetail : shopCartDetails) {
+            if (shopCartDetail.getProductId() == productId) {
+                shopCartDetails.remove(shopCartDetail);
+                break;
+            }
+        }
+        request.getSession().setAttribute("shopCarts", shopCartDetails);
+//        shopCartDAO.deleteShopCartById(id);
         response.sendRedirect(request.getParameter("url"));
     }
 

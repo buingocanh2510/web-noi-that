@@ -25,7 +25,11 @@ public class CategoryServlet extends HttpServlet {
         String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
         String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
 
-        categoryDAO = new CategoryDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        try {
+            categoryDAO = new CategoryDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ProductDAO extends DatabaseDAO {
-    public ProductDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+    public ProductDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) throws ClassNotFoundException {
         super(jdbcURL, jdbcUsername, jdbcPassword);
     }
 

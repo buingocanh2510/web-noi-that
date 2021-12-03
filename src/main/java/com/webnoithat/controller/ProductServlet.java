@@ -28,8 +28,16 @@ public class ProductServlet extends HttpServlet {
         String jdbcUsername = getServletContext().getInitParameter("jdbcUsername");
         String jdbcPassword = getServletContext().getInitParameter("jdbcPassword");
 
-        productDAO = new ProductDAO(jdbcURL, jdbcUsername, jdbcPassword);
-        categoryDAO = new CategoryDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        try {
+            productDAO = new ProductDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            categoryDAO = new CategoryDAO(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -44,12 +52,16 @@ public class ProductServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
+
+        // Chức năng: xem chi  tiết sản phẩm
+        // check xem có lọc theo id product không: null: Không - #null: có
         String id = request.getParameter("id");
+
+        // check xem có search theo name không: null: Không - #null: có
         String name = request.getParameter("name");
 
-        // TH lấy tất cả sản phẩm
+        // TH lấy tất cả sản phẩm theo category id
         if (Objects.isNull(id) && Objects.isNull(name)) {
-            System.out.println("Get all");
             getByCategoryId(request, response);
             return;
         }
@@ -77,14 +89,17 @@ public class ProductServlet extends HttpServlet {
         category.setName("Tất cả sản phẩm");
         String categoryId = request.getParameter("categoryId");
 
-        // Lấy theo từng danh mục sản phẩm (theo categoryId)
+        // Kiếm tra xem có lọc theo danh mục sản phẩm không
         if (Objects.isNull(categoryId)) {
-            products.addAll(productDAO.getAll()); // lấy tất cả
+            // lấy tất cả
+            products.addAll(productDAO.getAll());
         } else {
-            products.addAll(productDAO.getByCategoryId(Integer.parseInt(categoryId))); // lấy theo danh mục sản phẩm (id)
+            // Lấy theo từng danh mục sản phẩm (theo categoryId # null)
+            products.addAll(productDAO.getByCategoryId(Integer.parseInt(categoryId)));
             category = categoryDAO.getById(Integer.parseInt(categoryId));
         }
 
+        // setAttribute trả về file jsp hiển thị lên view
         request.setAttribute("category", category);
         request.setAttribute("products", products);
         request.setAttribute("categories", categories);
